@@ -15,31 +15,70 @@ struct deposit {
     var dep200: Int
     var dep100:Int
     var dep300:Int
+    var dep400:Int
     
     // Actual deposit methods to call upon when user is trying to deposit x amount of money.
     
     func deposit100() {
         
         accountBalance += 100
-        print("100 dollars has been deposited into account #\(accountNum). Your new account balance is \(accountBalance)")
+        print("\(dep100) dollars has been deposited into account #\(accountNum). Your new account balance is \(accountBalance)")
         
     }
     
     func deposit200 () {
         
         accountBalance += 200
-        print("200 dollars has been deposited into account #\(accountNum). Your new account balance is \(accountBalance)")
+        print("\(dep200) dollars has been deposited into account #\(accountNum). Your new account balance is \(accountBalance)")
         
     }
     
     func deposit300 () {
         accountBalance += 300
-        print("300 dollars has been deposited into account #\(accountNum). Your new account balance is \(accountBalance)")
+        print("\(dep300) dollars has been deposited into account #\(accountNum). Your new account balance is \(accountBalance)")
     }
     
-    
+    func deposit400 () {
+        accountBalance += 400
+        print("\(dep400) dollars has been deposited into account #\(accountNum). Your new account balance is \(accountBalance)")
+    }
     
 }
+
+//Withdraw structure which will be used to call the methods to withdraw x money.
+struct withdraw {
+    
+    var with200:Int
+    var with300:Int
+    var with400:Int
+    var with500:Int
+    
+    func withdraw200() {
+        accountBalance -= 200
+        print("\(with200) dollars has been withdrawn from account #\(accountNum). Your new account balance is \(accountBalance)")
+    }
+    
+    func withdraw300 () {
+        accountBalance -= 300
+        print("\(with300) dollars has been withdrawn from account #\(accountNum). Your new account balance is \(accountBalance)")
+    }
+
+    func withdraw400() {
+        accountBalance -= 400
+        print("\(with400) dollars has been withdrawn from account #\(accountNum). Your new account balance is \(accountBalance)")
+    }
+    
+    func withdraw500() {
+        accountBalance -= 500
+        print("\(with500) dollars has been withdrawn from account #\(accountNum). Your new account balance is \(accountBalance)")
+    }
+    
+}
+
+
+
+
+
 
 
 // Login Global Variables
@@ -59,11 +98,11 @@ var pinTry = 3
 // ATM Global Variables
 
 let accessCode = "3355"
-var accountBalance = 500
+var accountBalance = 10000
 
 // Deposit Global Variables
 
-var dep = deposit(dep200: 200,dep100: 100,dep300: 300)
+var dep = deposit(dep200: 200,dep100: 100,dep300: 300,dep400: 400)
 
 
 
@@ -99,7 +138,6 @@ loginTry = loginTry - 1
                 let accessCodeInput = readLine()
                 if accessCodeInput == accessCode {
                     print("Acess granted.")
-                    loggedIn = true
                     promptPin()
                 }
                 
@@ -218,7 +256,7 @@ func start () {
     
     switch atmChoice {
     case "deposit":
-        print("How much would you like to deposit? (100,200,300) ")
+        print("How much would you like to deposit? (100,200,300,400) ")
             let depositChoice = readLine()
         switch depositChoice {
         case "100" :
@@ -227,6 +265,8 @@ func start () {
             dep.deposit200()
         case "300" :
             dep.deposit300()
+        case "400":
+            dep.deposit400()
         default:
             print("Choose a value.")
         }
@@ -238,10 +278,7 @@ func start () {
        loggedIn = false
     }
     
-    
-    
-    
-    
+
     
 }
 

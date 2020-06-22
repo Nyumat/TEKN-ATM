@@ -53,6 +53,8 @@ struct withdraw {
     var with400:Int
     var with500:Int
     
+    // Withdraw methods to call upon when user is trying to withdraw x amount of money.
+    
     func withdraw200() {
         accountBalance -= 200
         print("\(with200) dollars has been withdrawn from account #\(accountNum). Your new account balance is \(accountBalance)")
@@ -74,11 +76,6 @@ struct withdraw {
     }
     
 }
-
-
-
-
-
 
 
 // Login Global Variables
@@ -103,6 +100,7 @@ var accountBalance = 10000
 // Deposit Global Variables
 
 var dep = deposit(dep200: 200,dep100: 100,dep300: 300,dep400: 400)
+var with = withdraw(with200: 200,with300:300,with400:400,with500: 500)
 
 
 
@@ -117,7 +115,7 @@ let accountNumInput = readLine()
         loggedIn = true
         
 } else {
-        
+        //Counter for the AN attempts.
 loginTry = loginTry - 1
         
         switch loginTry {
@@ -169,7 +167,7 @@ func promptPin () {
             
         } else {
             
-            pinTry = pinTry - 1
+            pinTry = pinTry - 1 //Counter for the Pin
             
             switch pinTry {
                 
@@ -204,7 +202,7 @@ func promptPin () {
     
 }
 
-// Function to keep the program running during ATM use.
+// Function to keep the program running during ATM use. Encased in a while loop because why not?
 
 func login () {
 
@@ -215,7 +213,7 @@ func login () {
             promptAccountNum()
             
         } else {
-            
+            //Secruity measures.
             promptPin()
             
         }
@@ -229,11 +227,9 @@ func login () {
     }
     
     
-    
-    
 }
 
-// Function to welcome user to the ATM.
+// Function to welcome user to the ATM at the beginning of the program.
 
 func welcomeThem () {
 
@@ -264,26 +260,37 @@ func start () {
         case "200":
             dep.deposit200()
         case "300" :
-            dep.deposit300()
+            dep.deposit300()                                                                            // Withdraw Switch statement cases.
         case "400":
             dep.deposit400()
         default:
-            print("Choose a value.")
+            print("Please, choose a value.")
         }
     case "withdraw":
-        print("How much would you like to withdraw?")
+        print("How much would you like to withdraw? (200,300,400,500)")
+            let withdrawChoice = readLine()
+        switch withdrawChoice {
+        case "200":
+                with.withdraw200()
+        case "300":
+                with.withdraw300()
+        case "400":
+                with.withdraw400()                                                      // Withdraw Switch statement cases.
+        case "500":
+                with.withdraw500()
+        default:
+            print("Please, choose a value.")
+        }
         
     default:
        sayGoodbye()
        loggedIn = false
     }
     
-
-    
 }
 
 
-// Say goodbye to user when done with ATM.
+// Say goodbye to user when they're done with our ATM.
 
 func sayGoodbye() {
     print("Thank you for using the ATM.")
@@ -291,7 +298,6 @@ func sayGoodbye() {
 
 
 
-// Function Calls
-
+// "Beginning of the actual functional programming, where the functions are actually called.
 welcomeThem()
 login()

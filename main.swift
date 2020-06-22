@@ -1,0 +1,260 @@
+//
+//  main.swift
+//  TEKN-ATM
+//
+//  Created by Thomas Nyuma on 6/22/20.
+//  Copyright © 2020 Thomas Nyuma. All rights reserved.
+//
+
+import Foundation
+
+//Deposit Struct to clean some of the code up.
+
+struct deposit {
+    
+    var dep200: Int
+    var dep100:Int
+    var dep300:Int
+    
+    // Actual deposit methods to call upon when user is trying to deposit x amount of money.
+    
+    func deposit100() {
+        
+        accountBalance += 100
+        print("100 dollars has been deposited into account #\(accountNum). Your new account balance is \(accountBalance)")
+        
+    }
+    
+    func deposit200 () {
+        
+        accountBalance += 200
+        print("200 dollars has been deposited into account #\(accountNum). Your new account balance is \(accountBalance)")
+        
+    }
+    
+    func deposit300 () {
+        accountBalance += 300
+        print("300 dollars has been deposited into account #\(accountNum). Your new account balance is \(accountBalance)")
+    }
+    
+    
+    
+}
+
+
+// Login Global Variables
+var loginTry = 3
+var loggedIn = false
+
+// Account Number Global Variables
+
+let accountNum = "3355864804297750"
+var haveAccountNum = false
+
+// Pin Global Variables
+
+var pinCorrect = false
+var pinTry = 3
+
+// ATM Global Variables
+
+let accessCode = "3355"
+var accountBalance = 500
+
+// Deposit Global Variables
+
+var dep = deposit(dep200: 200,dep100: 100,dep300: 300)
+
+
+
+//Function to prompt the users account number.
+func promptAccountNum () {
+print("What is your account number")
+let accountNumInput = readLine()
+
+    if accountNumInput == accountNum {
+        
+        print("Access granted.")
+        loggedIn = true
+        
+} else {
+        
+loginTry = loginTry - 1
+        
+        switch loginTry {
+        case 2 :
+             print("Wrong entry. Please try again. 2 tries remain before you will be locked out, requiring an access code.")
+        case 1:
+            print("Wrong entry. Please try again. 1 try reamins before you will be locked out, requiring an access code.")
+        case 0 :
+            print("You have been locked out. Please enter an access code to proceed.")
+            let accessCodeInput = readLine()
+            if accessCodeInput == accessCode {
+                print("Welcome back, Thomas")
+                loggedIn = true
+                promptPin()
+            } else {
+                
+                print("Incorrect access code. Please try again.")
+                let accessCodeInput = readLine()
+                if accessCodeInput == accessCode {
+                    print("Acess granted.")
+                    loggedIn = true
+                    promptPin()
+                }
+                
+            }
+            
+        default:
+            print("Derp.")
+            
+        }
+        
+    }
+    
+}
+
+// Function to prompt the users pin number.
+func promptPin () {
+    
+    while pinCorrect == false {
+        
+        let pin = "614353"
+        
+        print("Please enter a pin number.")
+        let pinNumInput = readLine()
+        if pinNumInput == pin {
+            
+            print("Entering system...")
+            pinCorrect = true
+            loggedIn = true
+            
+        } else {
+            
+            pinTry = pinTry - 1
+            
+            switch pinTry {
+                
+            case 2 :
+                print("Incorrect Pin. 2 tries before lockout")
+            case 1:
+                print("Incorrect Pin. 1 try before lockout.")
+            case 0:
+                print("You have been locked out. Please enter an access code to access the account.")
+                let accessCodeInput = readLine()
+                if accessCodeInput == accessCode {
+                    print("Welcome back, Thomas")
+                    loggedIn = true
+                } else {
+                    
+                    print("Incorrect access code. Please try again.")
+                    let accessCodeInput = readLine()
+                    if accessCodeInput == accessCode {
+                        print("Welcome back, Thomas")
+                        loggedIn = true
+                    }
+                    
+                    
+                }
+            default:
+                print("Derp.")
+            }
+        
+        }
+        
+    }
+    
+}
+
+// Function to keep the program running during ATM use.
+
+func login () {
+
+    while loggedIn == false {
+        
+        if haveAccountNum == true{
+            
+            promptAccountNum()
+            
+        } else {
+            
+            promptPin()
+            
+        }
+        
+    }
+
+    while loggedIn == true {
+        
+        start()
+        
+    }
+    
+    
+    
+    
+}
+
+// Function to welcome user to the ATM.
+
+func welcomeThem () {
+
+    print("Welcome to this ATM. Do you have an account number ? Type \"yes\" to agree.")
+    let haveANInput = readLine()
+    if haveANInput == "yes" {
+        haveAccountNum = true
+        promptAccountNum()
+    } else {
+        promptPin()
+    }
+    
+}
+
+// Actual ATM use function, *used in one place only.
+func start () {
+    
+    print("Would you like to do a deposit, a withdraw, or exit the ATM?")
+    let atmChoice = readLine()
+    
+    switch atmChoice {
+    case "deposit":
+        print("How much would you like to deposit? (100,200,300) ")
+            let depositChoice = readLine()
+        switch depositChoice {
+        case "100" :
+            dep.deposit100()
+        case "200":
+            dep.deposit200()
+        case "300" :
+            dep.deposit300()
+        default:
+            print("Choose a value.")
+        }
+    case "withdraw":
+        print("How much would you like to withdraw?")
+        
+    default:
+       sayGoodbye()
+       loggedIn = false
+    }
+    
+    
+    
+    
+    
+    
+}
+
+
+// Say goodbye to user when done with ATM.
+
+func sayGoodbye() {
+    print("Thank you for using the ATM.")
+}
+
+
+
+// Function Calls
+
+welcomeThem()
+login()

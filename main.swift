@@ -238,8 +238,10 @@ func welcomeThem () {
     if haveANInput == "yes" {
         haveAccountNum = true
         promptAccountNum()
-    } else {
+    } else if haveANInput == "no" {
         promptPin()
+    } else {
+        print("Incorrect input. Please try again.")
     }
     
 }

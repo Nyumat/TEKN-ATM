@@ -24,4 +24,4 @@
 
 #### Now click close and you're all set! All you gotta do now is compile the program, and it should run!!
 
-##### Enjoy ;)
+# Enjoy ;)

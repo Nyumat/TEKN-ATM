@@ -8,7 +8,7 @@
 
 `open urPATH/urPATH/urPATH/TEKN-ATM.xcodeproj`
 
-  _ Disclaimer: You must import the `main.swift` file into the file just downloaded for this to work! _   
+  *Disclaimer: You must import the `main.swift` file into the file just downloaded for this to work!*  
 
 #### You now have the code. Next, find the  Terminal Logo with the Project Name up top.
 

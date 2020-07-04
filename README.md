@@ -6,6 +6,5 @@
 
 #### Once you have the file, load up  Xcode, and click Edit Scheme
 
-![Image]
-(https://i.stack.imgur.com/Oysgl.png)
+![Scheme](https://i.stack.imgur.com/Oysgl.png)
 

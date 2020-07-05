@@ -1,5 +1,5 @@
 # TEKN-ATM
- An ATM Simulator made in Xcode's command line tool.
+ ##### An ATM Simulator made in Xcode's command line tool.
 
 ### To run project (Mac)...
   Download the file `TEKN-ATM.xcodeproj` & `main.swift` under **<>Code** on this Github repo.
